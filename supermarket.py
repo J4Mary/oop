@@ -15,16 +15,16 @@ class Basket:
     def __init__(self, my_list):
         self.my_list=my_list
     def total(self):
-        s=0
+        sum=0
         for key,value in self.my_list:
-            s+=key.price*value
-        return s
+            sum+=key.price_total(value)
+        return sum
     def totally_eatable(self):
-        f=True
+        flag=True
         for key, value in self.my_list:
-            if key.category=='household chemicals':
-                f=False
-        return f
+            if key.is_eatable()==False:
+                flag=False
+        return flag
 bread=Tovar(10, 'food', 'bread', 'one')
 milk=Tovar(17, 'drink', 'milk', 'one')
 apple=Tovar(13, 'food', 'apple', 'kg')
