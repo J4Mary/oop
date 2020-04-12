@@ -1,3 +1,5 @@
+from datetime import date, timedelta
+
 class Employee:
     def __init__(self, name, surname, email, telephone, salary):
         self.name=name
@@ -7,8 +9,16 @@ class Employee:
         self.salary=salary
     def work(self):
         return "I come to the office."
-    def check_salary(self, days):
-        return days*self.salary
+    def check_salary(self):
+        now = date.today()
+        month_start = date(now.year, now.month, 1)
+        weekend = [5, 6]
+        diff = (now - month_start).days + 1
+        day_count = 0
+        for day in range(diff):
+            if (month_start + timedelta(day)).weekday() not in weekend:
+                day_count += 1
+        return day_count*self.salary
     def __str__(self):
         return self.__class__.__name__+': '+self.name+' '+self.surname
 
@@ -65,3 +75,4 @@ print(programmer1!=programmer2)
 alfa=Programmer('Lera', 'Brown', 'l@gmail.com', '98765431', 120, [], 0)
 alfa=alfa + programmer1 +programmer2
 print(alfa.tech_stack)
+print(programmer1.check_salary())
